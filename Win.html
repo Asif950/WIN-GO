@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HGZY Smart Predictor</title>
+  <style>
+    body {
+      background-image: url('https://i.ibb.co.com/pjyJdBQt/IMG-20250407-114113-128.jpg'); /* এখানে আপনার ছবির লিংক দিন */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    input {
+      width: 100px;
+      font-size: 18px;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 18px;
+      background: #0f0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .red { color: red; }
+    .green { color: lime; }
+    .violent { color: violet; }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>HGZY Smart Predictor</h2>
+    <p>Enter last 3 digits of Rund Number:</p>
+    <input type="number" id="last3" placeholder="e.g. 748" maxlength="3">
+
+    <p>Enter current result (0–9):</p>
+    <input type="number" id="current" placeholder="e.g. 0" min="0" max="9">
+
+    <br>
+    <button onclick="predict()">Predict</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <script>
+    function predict() {
+      let last3 = document.getElementById("last3").value.trim();
+      let currentInput = document.getElementById("current").value.trim();
+      let current = parseInt(currentInput);
+
+      if (last3.length !== 3 || isNaN(current) || current < 0 || current > 9) {
+        document.getElementById("output").innerText = "Please enter valid inputs.";
+        return;
+      }
+
+      let digits = last3.split('').map(n => parseInt(n));
+      let sum = digits.reduce((a, b) => a + b, 0) + current;
+      let nextNum = sum % 10;
+
+      let size = (nextNum <= 4) ? "Small" : "Big";
+
+      let colorLabel = "";
+      let colorClass = "";
+
+      if ([1, 3, 7, 9].includes(nextNum)) {
+        colorLabel = "Green";
+        colorClass = "green";
+      } else if ([2, 4, 6, 8].includes(nextNum)) {
+        colorLabel = "Red";
+        colorClass = "red";
+      } else if ([0, 5].includes(nextNum)) {
+        colorLabel = "Violent";
+        colorClass = "violent";
+      }
+
+      document.getElementById("output").innerHTML = `
+        <hr>
+        Next Prediction:<br><br>
+        Number: <strong>${nextNum}</strong><br>
+        Color: <span class="${colorClass}">${colorLabel}</span><br>
+        Size: <strong>${size}</strong>
+      `;
+    }
+  </script>
+
+</body>
+</html>
