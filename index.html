@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HGZY Smart Predictor</title>
   <style>
     body {
-      background-image: url('https://i.ibb.co.com/pjyJdBQt/IMG-20250407-114113-128.jpg'); /* এখানে আপনার ছবির লিংক দিন */
+      background-image: url('https://i.ibb.co.com/pjyJdBQt/IMG-20250407-114113-128.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
@@ -13,6 +14,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 30px;
+      margin: 0;
     }
 
     .box {
@@ -21,16 +23,19 @@
       border-radius: 15px;
       display: inline-block;
       box-shadow: 0 0 15px #0ff;
+      max-width: 90%;
     }
 
     input {
-      width: 100px;
+      width: 80%;
+      max-width: 150px;
       font-size: 18px;
       padding: 10px;
-      margin: 10px;
+      margin: 10px auto;
       text-align: center;
       border-radius: 6px;
       border: none;
+      display: block;
     }
 
     button {
@@ -40,6 +45,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      margin-top: 10px;
     }
 
     .result {
@@ -63,7 +69,6 @@
     <p>Enter current result (0–9):</p>
     <input type="number" id="current" placeholder="e.g. 0" min="0" max="9">
 
-    <br>
     <button onclick="predict()">Predict</button>
 
     <div class="result" id="output"></div>
